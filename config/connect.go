@@ -11,7 +11,7 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	dsn := "host=localhost user=shivraj password=shivraj123 dbname=taskmanager port=5432 sslmode=disable"
+	dsn := "host=localhost user=user password=user123 dbname=taskmanager port=5432 sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
@@ -22,6 +22,8 @@ func Connect() {
 func CreateTables(DB *gorm.DB) {
 	DB.AutoMigrate(&model.User{}, &model.Team{}, &model.Task{}, &model.Comment{}, &model.Notification{}, &model.Label{}, &model.Attachment{})
 }
+
+// ------------------------------- For Sqlite --------------------------------------
 
 // package config
 

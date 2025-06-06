@@ -7,8 +7,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: shivraj
-      POSTGRES_PASSWORD: shivraj123
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user123
       POSTGRES_DB: taskmanager
     volumes:
       - postgres_data:/var/lib/postgresql/data

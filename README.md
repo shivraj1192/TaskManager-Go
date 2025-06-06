@@ -22,8 +22,7 @@ A robust backend API for managing users, teams, tasks, comments, labels, attachm
 - [Development Notes](#development-notes)
 - [Troubleshooting](#troubleshooting)
 - [Further Reading](#further-reading)
-- [Manual SQL & Foreign Key Troubleshooting](#manual-sql--foreign-key-troubleshooting)
-- [Deleting the Database (Resetting Everything)](#deleting-the-database-resetting-everything)
+- [Manual SQL & Foreign Key Troubleshooting](#manual-sql--foreign-key-troubleshooting-optional)
 
 ---
 
@@ -52,7 +51,6 @@ Task Manager API is a backend service for collaborative task management. It supp
 ```
 .
 ├── .env
-├── doc.md
 ├── docker-compose.yaml
 ├── go.mod
 ├── go.sum
@@ -190,7 +188,7 @@ Tables are auto-created on server start using GORM's auto-migrate feature.
 
 > **Note:**  
 > If you prefer manual SQL setup or want to inspect the schema, refer to  
-> [`config/connect.go`](config/connect.go) for auto-migrate logic and [`doc.md`](doc.md) for raw SQL commands.
+> [`config/connect.go`](config/connect.go) for auto-migrate logic.
 
 
 ### 6. Start the Server
@@ -254,7 +252,6 @@ See [routes/setUpRoutes.go](routes/setUpRoutes.go) for the full API routing.
 - Uses [GORM](https://gorm.io/docs/) for ORM/database access
 - Attachments are stored in `static/file/` directory
 - Notifications are created for most user actions
-- See [doc.md](doc.md) for more setup and SQL notes
 
 ---
 
@@ -263,7 +260,7 @@ See [routes/setUpRoutes.go](routes/setUpRoutes.go) for the full API routing.
 - **Port Already in Use:** Change the `PORT` in `.env`.
 - **Database Connection Issues:** Check credentials in `.env` and [config/connect.go](config/connect.go).
 - **JWT Errors:** Ensure `SECRET_KEY` is set and matches in both `.env` and your environment.
-- **Auto-migration Issues:** Check [config/connect.go](config/connect.go) and [doc.md](doc.md) for manual SQL commands.
+- **Auto-migration Issues:** Check [config/connect.go](config/connect.go).
 
 ---
 
@@ -344,39 +341,3 @@ ALTER TABLE labels
 ```
 
 > **Tip:** If you get an error about a missing constraint, that's OK—`DROP CONSTRAINT IF EXISTS` will skip it.
-
----
-
-## Deleting the Database (Resetting Everything) (Optional)
-
-If you want to **delete the entire database** (for a fresh start):
-
-### Windows
-
-1. Open **pgAdmin** or Command Prompt and connect to PostgreSQL.
-2. Run:
-   ```sql
-   DROP DATABASE IF EXISTS taskmanager;
-   CREATE DATABASE taskmanager;
-   ```
-
-### Linux/Mac
-
-1. Open Terminal and run:
-   ```sh
-   sudo -u postgres psql
-   ```
-   Then in the `psql` prompt:
-   ```sql
-   DROP DATABASE IF EXISTS taskmanager;
-   CREATE DATABASE taskmanager;
-   \q
-   ```
-
-2. Or, if you have a user:
-   ```sh
-   psql -U your_username
-   ```
-   Then run the same SQL as above.
-
-> **Note:** After recreating the database, restart your Go server to auto-migrate tables again.
