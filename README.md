@@ -100,7 +100,7 @@ Task Manager API is a backend service for collaborative task management. It supp
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/task-manager.git
+git clone https://github.com/shivraj1192/TaskManager-Go.git
 cd task-manager
 ```
 
@@ -140,7 +140,7 @@ SECRET_KEY=your_secret_key
 
 ### 4. Set Up PostgreSQL Database
 
-#### Option A: Using Docker (Recommended)
+#### Option A: Using Docker (`Recommended`)
 
 Start PostgreSQL using Docker Compose:
 
