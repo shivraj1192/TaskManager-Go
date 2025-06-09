@@ -140,7 +140,7 @@ SECRET_KEY=your_secret_key
 
 ### 4. Set Up PostgreSQL Database
 
-#### Option A: Using Docker ($${\color{red}Recommended}$$)
+#### Option A: Using Docker (Recommended)
 
 Start PostgreSQL using Docker Compose:
 
