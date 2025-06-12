@@ -14,9 +14,12 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	err := godotenv.Load()
+	err := godotenv.Load(".env")
 	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+		err = godotenv.Load("backend/.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %v", err)
+		}
 	}
 
 	host := os.Getenv("DB_HOST")
