@@ -5,6 +5,7 @@ go 1.24.2
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang-jwt/jwt/v4 v4.5.2
+	github.com/joho/godotenv v1.5.1
 	github.com/subosito/gotenv v1.6.0
 	golang.org/x/crypto v0.38.0
 	gorm.io/driver/postgres v1.6.0
