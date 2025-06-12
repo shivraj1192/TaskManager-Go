@@ -19,5 +19,8 @@ func main() {
 	router := gin.Default()
 	routes.SetUpRoutes(router)
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	router.Run(":" + port)
 }
