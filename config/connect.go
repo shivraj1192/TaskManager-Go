@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"os"
 	"task-manager/model"
 
 	"gorm.io/driver/postgres"
@@ -11,8 +12,10 @@ import (
 var DB *gorm.DB
 
 func Connect() {
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
 
-	dsn := "host=localhost user=shivraj password=shivraj123 dbname=taskmanager port=5432 sslmode=disable"
+	dsn := "host=localhost user=" + user + " password=" + password + " dbname=taskmanager port=5432 sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
