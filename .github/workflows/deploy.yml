@@ -1,26 +1,22 @@
-name: Set Environment Variables
+name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  set-env-vars:
+  deploy:
     runs-on: ubuntu-latest
-
-    env:
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print DB_USER (for debug - remove in real use)
-        run: echo "DB_USER is $DB_USER"
-      - name: Print DB_PASSWORD (for debug - remove in real use)
-        run: echo "DB_PASSWORD is $DB_PASSWORD"
-      - name: Print SECRET_KEY (for debug - remove in real use)
-        run: echo "SECRET_KEY is $SECRET_KEY"
+      - name: Build Docker image
+        run: docker build . -t shivraj1192/taskmanager-go:latest
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Push Docker image
+        run: docker push shivraj1192/taskmanager-go:latest

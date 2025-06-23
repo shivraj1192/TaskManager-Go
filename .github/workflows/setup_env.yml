@@ -1,0 +1,26 @@
+name: Set Environment Variables
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  set-env-vars:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print DB_USER (for debug - remove in real use)
+        run: echo "DB_USER is $DB_USER"
+      - name: Print DB_PASSWORD (for debug - remove in real use)
+        run: echo "DB_PASSWORD is $DB_PASSWORD"
+      - name: Print SECRET_KEY (for debug - remove in real use)
+        run: echo "SECRET_KEY is $SECRET_KEY"
